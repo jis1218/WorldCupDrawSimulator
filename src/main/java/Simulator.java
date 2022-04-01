@@ -10,5 +10,21 @@ public class Simulator {
                 PortContainer::new
         ).collect(Collectors.toList());
 
+        Groups groups = new Groups();
+
+        //A TO H round robin
+
+        portContainers.get(0).getNations().remove(Nation.QATAR);
+        groups.putQatarIntoGroupA();
+
+        for(PortContainer portContainer : portContainers) {
+            while(portContainer.isNationRemain()) {
+                Nation nation = portContainer.popNation();
+                groups.putNationIntoGroup(nation);
+            }
+        }
+
+        groups.printGroups();
+
     }
 }

@@ -25,8 +25,8 @@ public enum Nation {
     SERBIA(Continent.EUROPE, Port.THREE),
     POLAND(Continent.EUROPE, Port.THREE),
     KOREA(Continent.ASIA, Port.THREE),
-    TUNISIA(Continent.AFRICA, Port.FOUR),
-    CANADA(Continent.NORTH_AMERICA, Port.THREE),
+    TUNISIA(Continent.AFRICA, Port.THREE),
+    CANADA(Continent.NORTH_AMERICA, Port.FOUR),
     CAMEROON(Continent.AFRICA, Port.FOUR),
     ECUADOR(Continent.SOUTH_AMERICA, Port.FOUR),
     SAUDI_ARABIA(Continent.ASIA, Port.FOUR),
@@ -43,12 +43,35 @@ public enum Nation {
         this.port = port;
     }
 
+    public Continent getContinent() {
+        return continent;
+    }
+
     public Port getPort() {
         return this.port;
     }
 
+    public int getPortNumber() {
+        return this.port.getPortNumber();
+    }
+
     public boolean isSamePort(Port port) {
         return this.port == port;
+    }
+
+    public boolean isSameContinent(Nation nation) {
+        if(
+                (this.continent == Continent.ASIA && nation.getContinent() == Continent.ASIA_SA)
+                || (this.continent == Continent.SOUTH_AMERICA && nation.getContinent() == Continent.ASIA_SA)
+                || (this.continent == Continent.NORTH_AMERICA && nation.getContinent() == Continent.OCE_NA)
+        ) {
+            return true;
+        }
+        return this.continent == nation.getContinent();
+    }
+
+    public boolean isEurope(Nation nation) {
+        return this.continent == Continent.EUROPE;
     }
 
     public static boolean validatePort() {
