@@ -1,34 +1,40 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Groups {
-    Map<GroupName, Group> groups = new HashMap<>();
+
+    List<Group> groups = new ArrayList<>();
 
     public Groups() {
         Arrays.stream(GroupName.values()).forEach(
-                groupName -> groups.put(groupName, new Group(groupName))
+            groupName -> groups.add(new Group(groupName))
         );
     }
 
     public void putQatarIntoGroupA() {
-        Group groupA = groups.get(GroupName.A);
+        Group groupA = groups.get(0);
         groupA.putNationIntoGroup(Nation.QATAR);
     }
 
-    public void putNationIntoGroup(Nation nation) {
-        for(GroupName groupName : GroupName.values()) {
-            Group group = groups.get(groupName);
+    public void putNationIntoGroup(Nation nation, Port port) {
+        for (int i = 0; i < groups.size(); i++) {
+            Group group = groups.get(i);
 
-            if(group.putNationIntoGroup(nation)) {
+//            for(int j = i; j < groups.size(); j++) {
+//                port
+//            }
+
+            if (group.putNationIntoGroup(nation)) {
                 break;
             }
         }
     }
 
+
     public void printGroups() {
-        this.groups.keySet().stream().sorted().forEach(
-                groupName -> this.groups.get(groupName).printGroup()
-        );
+        this.groups.forEach(group -> group.printGroup());
     }
 }

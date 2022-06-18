@@ -7,11 +7,18 @@ public class Group {
     private GroupName groupName;
     private List<Nation> nations;
     private int europeNumber;
+    private int africaNumber;
+    private int asiaNumber;
+    private int northAmericaNumber;
+    private int southAmericaNumber;
+    private int oceaniaNumber;
+    private ContinentNumber continentNumber;
 
     public Group(GroupName groupName) {
         this.groupName = groupName;
         this.nations = new ArrayList<>();
         this.europeNumber = 0;
+        this.continentNumber = new ContinentNumber(2, 1, 1, 1, 1, 1);
     }
 
     public boolean putNationIntoGroup(Nation nation) {
@@ -48,5 +55,9 @@ public class Group {
     public void printGroup() {
         String nationStringList = this.nations.stream().map(Objects::toString).collect(Collectors.joining(", "));
         System.out.println("Group " + groupName + " : " + nationStringList);
+    }
+
+    public ContinentNumber getContinentNumber() {
+        return this.continentNumber;
     }
 }
