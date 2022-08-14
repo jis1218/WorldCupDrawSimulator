@@ -7,11 +7,13 @@ import java.util.Map;
 public class Groups {
 
     List<Group> groups = new ArrayList<>();
+    boolean isGroupDraw[];
 
     public Groups() {
         Arrays.stream(GroupName.values()).forEach(
             groupName -> groups.add(new Group(groupName))
         );
+        isGroupDraw = new boolean[groups.size()];
     }
 
     public void putQatarIntoGroupA() {
@@ -19,18 +21,13 @@ public class Groups {
         groupA.putNationIntoGroup(Nation.QATAR);
     }
 
-    public void putNationIntoGroup(Nation nation, Port port) {
-        for (int i = 0; i < groups.size(); i++) {
-            Group group = groups.get(i);
-
-//            for(int j = i; j < groups.size(); j++) {
-//                port
-//            }
-
-            if (group.putNationIntoGroup(nation)) {
-                break;
-            }
+    public ContinentNumber getAllContinentNumber() {
+        ContinentNumber continentNumber = new ContinentNumber();
+        for (Group group : groups) {
+            continentNumber.plusContinentNumber(group.getContinentNumber());
         }
+
+        return continentNumber;
     }
 
 

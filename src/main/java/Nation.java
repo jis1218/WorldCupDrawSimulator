@@ -32,8 +32,8 @@ public enum Nation {
     SAUDI_ARABIA(Continent.ASIA, PortNumber.FOUR),
     GHANA(Continent.AFRICA, PortNumber.FOUR),
     EUROPE_PLAYOFF(Continent.EUROPE, PortNumber.FOUR),
-    ASIA_SA_PLAYOFF(Continent.ASIA_SA, PortNumber.FOUR),
-    OCE_NA_PLAYOFF(Continent.OCE_NA, PortNumber.FOUR);
+    ASIA_SA_PLAYOFF(Continent.ASIA, PortNumber.FOUR),
+    OCE_NA_PLAYOFF(Continent.NORTH_AMERICA, PortNumber.FOUR);
 
     private Continent continent;
     private PortNumber portNumber;

@@ -6,18 +6,11 @@ import java.util.stream.Collectors;
 public class Group {
     private GroupName groupName;
     private List<Nation> nations;
-    private int europeNumber;
-    private int africaNumber;
-    private int asiaNumber;
-    private int northAmericaNumber;
-    private int southAmericaNumber;
-    private int oceaniaNumber;
     private ContinentNumber continentNumber;
 
     public Group(GroupName groupName) {
         this.groupName = groupName;
         this.nations = new ArrayList<>();
-        this.europeNumber = 0;
         this.continentNumber = new ContinentNumber(2, 1, 1, 1, 1, 1);
     }
 
@@ -26,38 +19,30 @@ public class Group {
             return false;
         }
 
-        if(nation.getContinent().equals(Continent.EUROPE)) {
-            this.europeNumber++;
-        }
+        continentNumber.numberDecrease(nation.getContinent());
 
         this.nations.add(nation);
         return true;
     }
 
-    private boolean validatePutPossible(Nation nation) {
+    public boolean validatePutPossible(Nation nation) {
         if (nations.size() != nation.getPortNumber()-1) {
             return false;
         }
-        for (Nation occupiedNation : nations) {
 
-            if(nation.getContinent() == Continent.EUROPE && europeNumber<2) {
-                return true;
-            }
-
-            if(occupiedNation.isSameContinent(nation)) {
-                return false;
-            }
-        }
-
-        return true;
+        return continentNumber.validate(nation.getContinent());
     }
 
     public void printGroup() {
         String nationStringList = this.nations.stream().map(Objects::toString).collect(Collectors.joining(", "));
-        System.out.println("Group " + groupName + " : " + nationStringList);
+        System.out.println("Group " + groupName + " : " + nationStringList + " (" + this.nations.size() + ")");
     }
 
     public ContinentNumber getContinentNumber() {
         return this.continentNumber;
+    }
+
+    public int getGroupNumber() {
+        return this.groupName.number;
     }
 }

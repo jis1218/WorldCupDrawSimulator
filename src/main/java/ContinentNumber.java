@@ -1,4 +1,5 @@
 public class ContinentNumber {
+
     private int europeNumber;
     private int africaNumber;
     private int asiaNumber;
@@ -19,48 +20,95 @@ public class ContinentNumber {
     }
 
     public void numberIncrease(Continent continent) {
-        if(continent.equals(Continent.EUROPE)) {
+        if (continent.equals(Continent.EUROPE)) {
             europeNumber++;
         }
-        if(continent.equals(Continent.AFRICA)) {
+        if (continent.equals(Continent.AFRICA)) {
             africaNumber++;
         }
-        if(continent.equals(Continent.ASIA)) {
+        if (continent.equals(Continent.ASIA) || continent.equals(Continent.ASIA_SA)) {
             asiaNumber++;
         }
-        if(continent.equals(Continent.NORTH_AMERICA)) {
+        if (continent.equals(Continent.NORTH_AMERICA) || continent.equals(Continent.OCE_NA)) {
             northAmericaNumber++;
         }
-        if(continent.equals(Continent.SOUTH_AMERICA)) {
+        if (continent.equals(Continent.SOUTH_AMERICA) || continent.equals(Continent.ASIA_SA)) {
             southAmericaNumber++;
         }
-        if(continent.equals(Continent.OCEANIA)) {
+        if (continent.equals(Continent.OCEANIA) || continent.equals(Continent.OCE_NA)) {
             oceaniaNumber++;
         }
     }
 
     public void numberDecrease(Continent continent) {
-        if(continent.equals(Continent.EUROPE)) {
+        if (continent.equals(Continent.EUROPE)) {
             europeNumber--;
         }
-        if(continent.equals(Continent.AFRICA)) {
+        if (continent.equals(Continent.AFRICA)) {
             africaNumber--;
         }
-        if(continent.equals(Continent.ASIA)) {
+        if (continent.equals(Continent.ASIA) || continent.equals(Continent.ASIA_SA)) {
             asiaNumber--;
         }
-        if(continent.equals(Continent.NORTH_AMERICA)) {
+        if (continent.equals(Continent.NORTH_AMERICA) || continent.equals(Continent.OCE_NA)) {
             northAmericaNumber--;
         }
-        if(continent.equals(Continent.SOUTH_AMERICA)) {
+        if (continent.equals(Continent.SOUTH_AMERICA) || continent.equals(Continent.ASIA_SA)) {
             southAmericaNumber--;
         }
-        if(continent.equals(Continent.OCEANIA)) {
+        if (continent.equals(Continent.OCEANIA) || continent.equals(Continent.OCE_NA)) {
             oceaniaNumber--;
         }
     }
 
-    public void validate(ContinentNumber groupContinentNumber) {
+    public boolean validate(Continent continent) {
+        if (continent.equals(Continent.EUROPE)) {
+            return europeNumber > 0;
+        }
+        if (continent.equals(Continent.AFRICA)) {
+            return africaNumber > 0;
+        }
+        if (continent.equals(Continent.ASIA)) {
+            return asiaNumber > 0;
+        }
+        if (continent.equals(Continent.NORTH_AMERICA)) {
+            return northAmericaNumber > 0;
+        }
+        if (continent.equals(Continent.SOUTH_AMERICA)) {
+            return southAmericaNumber > 0;
+        }
+        if (continent.equals(Continent.OCEANIA)) {
+            return oceaniaNumber > 0;
+        }
+        if (continent.equals(Continent.ASIA_SA)) {
+            return asiaNumber > 0 && southAmericaNumber > 0;
+        }
+        if (continent.equals(Continent.OCE_NA)) {
+            return oceaniaNumber > 0 && northAmericaNumber > 0;
+        }
+
+        return false;
+    }
+
+    public ContinentNumber plusContinentNumber(ContinentNumber continentNumber) {
+        return new ContinentNumber(
+            this.europeNumber + continentNumber.getEuropeNumber(),
+            this.africaNumber + continentNumber.getAfricaNumber(),
+            this.asiaNumber + continentNumber.getAsiaNumber(),
+            this.northAmericaNumber + continentNumber.getNorthAmericaNumber(),
+            this.southAmericaNumber + continentNumber.getSouthAmericaNumber(),
+            this.oceaniaNumber + continentNumber.getOceaniaNumber()
+        );
+    }
+
+    public boolean compare(ContinentNumber continentNumber) {
+        return this.oceaniaNumber >= continentNumber.getOceaniaNumber() &&
+            this.europeNumber >= continentNumber.getEuropeNumber() &&
+            this.africaNumber >= continentNumber.getAfricaNumber() &&
+            this.asiaNumber >= continentNumber.getAsiaNumber() &&
+            this.southAmericaNumber >= continentNumber.getSouthAmericaNumber() &&
+            this.northAmericaNumber >= continentNumber.getNorthAmericaNumber();
+
     }
 
     public void printNumber() {

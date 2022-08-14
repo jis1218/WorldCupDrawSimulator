@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Port {
+
     private PortNumber portNumber;
     private List<Nation> nations;
     private Random random = new Random();
@@ -13,9 +14,9 @@ public class Port {
         this.portNumber = portNumber;
         this.continentNumber = new ContinentNumber();
         nations = Arrays.stream(Nation.values())
-                .filter(
-                        nation -> nation.isSamePort(portNumber)
-                ).collect(Collectors.toList());
+            .filter(
+                nation -> nation.isSamePort(portNumber)
+            ).collect(Collectors.toList());
 
         nations.forEach(nation -> this.continentNumber.numberIncrease(nation.getContinent()));
     }
@@ -30,6 +31,12 @@ public class Port {
         return this.nations.remove(number);
     }
 
+    public void popQatar() {
+        if (this.portNumber == PortNumber.ONE) {
+            this.nations.remove(Nation.QATAR);
+        }
+    }
+
     public boolean isNationRemain() {
         return !this.nations.isEmpty();
     }
@@ -39,5 +46,17 @@ public class Port {
     }
 
     public void validateGroup(Group group) {
+    }
+
+    public ContinentNumber getContinentNumber() {
+        return this.continentNumber;
+    }
+
+    public void minusContinentNumber(Nation nation) {
+        this.continentNumber.numberDecrease(nation.getContinent());
+    }
+
+    public PortNumber getPortNumber() {
+        return portNumber;
     }
 }
